@@ -1,0 +1,349 @@
+<!doctype html>
+
+<html lang="en" data-bs-theme="dark">
+
+<head>
+  <meta charset="utf-8">
+  <meta content="width=device-width, initial-scale=1" name="viewport">
+  <title>Metagenetics</title>
+  <link rel="stylesheet" href="/css/uri.css">
+  <link rel="stylesheet" href="css/bootstrap.css">
+  <link rel="shortcut icon" href="assets/fav_icon.png" type="image/x-icon">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-eOJxHZ/6XB1wL5nB0Sd15ceHTw3aDeE2WOlvNJ0Hb9agTibofziV10Bi92s08Ag1" crossorigin="anonymous">
+  <meta name="keywords" content="css3, html5, js, background video, fullscreen video">
+  <meta name="description" content="Super easy to implement HTML5 fullscreen background video library in JavaScript.">
+
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+    }
+
+    html,
+    body {
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+    }
+
+    #container {
+      overflow: hidden;
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+    }
+
+    #background_video {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      object-fit: cover;
+      height: 100%;
+      width: 100%;
+    }
+
+    #video_cover {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      background: url('video_cover.jpeg') no-repeat;
+      background-size: cover;
+      background-position: center;
+    }
+
+    #video_controls {
+      position: absolute;
+      left: 50%;
+      transform: translate(-50%, 0);
+    }
+
+    #play img {
+      width: 100px;
+    }
+
+    #pause img {
+      width: 90px;
+    }
+
+    #pause {
+      display: none;
+    }
+
+   @media (min-width: 768px) {
+      #video_controls {
+        display: none;
+      }
+    }
+
+    body {
+      text-align: center;
+      font-family: 'proxima-nova', Helvetica;
+    }
+
+    #container {
+      height: 100%;
+    }
+
+    #overlay {
+      position: absolute;
+      top: 0;
+      right: 0;
+      left: 0;
+      bottom: 0;
+      background: rgba(0, 0, 0, 0.5);
+    }
+
+    #main_content {
+      z-index: 2;
+      position: relative;
+      display: inline-block;
+      top: 50%;
+      padding: 7%;
+      transform: translateY(-50%);
+    }
+
+    #main_content h1 {
+      text-transform: uppercase;
+      font-weight: 600;
+      font-family: 'proxima-nova-condensed', Helvetica;
+      color: #fff;
+      font-size: 35px;
+    }
+
+    #main_content .sub_head {
+      margin-top: 11%;
+      color: rgb(255, 255, 255);
+      font-size: 24px;
+    }
+
+    #main_content .sub_head2 {
+      margin-top: 4%;
+      color: rgba(255, 255, 255, 0.774);
+      font-size: 16px;
+    }
+
+    #main_content .info {
+      color: rgba(255, 255, 255, 0.5);
+      font-size: 12px;
+      margin-top: 10px;
+    }
+
+    #links {
+      margin-top: 50px;
+    }
+
+    #links a {
+      border: 2px solid rgba(255, 255, 255, 0.20);
+      border-radius: 61px;
+      font-size: 12px;
+      color: #FFFFFF;
+      letter-spacing: 1px;
+      text-decoration: none;
+      text-transform: uppercase;
+      padding: 10px 25px;
+      display: inline-block;
+      margin-right: 15px;
+    }
+
+    #footer {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+    }
+
+    #footer a {
+      color: rgba(255, 255, 255, 0.5);
+      text-decoration: none;
+      margin: 10px;
+      font-size: 12px;
+    }
+
+    #footer a:first-child {
+      float: left;
+    }
+
+    #footer a:last-child {
+      float: right;
+    }
+
+  </style>
+
+  <script src="https://use.typekit.net/nlq1kdt.js"></script>
+  <script>try { Typekit.load({ async: true }); } catch (e) { }</script>
+</head>
+
+<body>
+  <div id="container">
+
+    <video id="background_video" loop muted></video>
+    <div id="video_cover"></div>
+    <div id="overlay"></div>
+
+    <section id="main_content">
+
+      <div id="head">
+        
+        <img class="animate__animated animate__slideInDown" src="assets/logo-white.png" alt="">
+
+        <p class="sub_head animate__animated animate__fadeInLeft">welcome to the metagenetics dashboard</p>
+        <p class="sub_head2 animate__animated animate__fadeInRight"> (Please enter your username and password)</p>
+
+        <div class="input-group mb-3">
+          <span class="input-group-text animate__animated animate__zoomIn" id="basic-addon1"><i class="bi bi-person-square animate__animated animate__zoomIn"></i></span>
+          <input type="text" class="form-control animate__animated animate__zoomIn" placeholder="Username" aria-label="Username"
+          aria-describedby="basic-addon1">
+        </div>
+
+      </div>
+
+      <div class="input-group mb-3">
+
+        <span class="input-group-text animate__animated animate__zoomIn" id="basic-addon1"><i class="bi bi-lock-fill animate__animated animate__zoomIn"></i></span>
+        <input type="password" class="form-control animate__animated animate__zoomIn" placeholder="Password" aria-label="Password"
+        aria-describedby="basic-addon1">
+
+      </div>
+    
+      <div class="row">
+
+        <div class="col-2 text-start animate__animated animate__fadeInLeft">
+          <button class="btn btn-dark">
+            <i class="bi bi-question-circle"></i>
+          </button>
+        </div>
+
+        
+    <!-- MENSAJE DE SISTEMA BLOQUEAO -->
+
+        <div class="col-8 text-start animate__animated animate__fadeInLeft" onclick="desplegarToastSuperior2()">
+          <button class="btn btn-dark  animate__animated animate__flash animate__infinite" id="blockMsg" style="display: none; background-color: #dd1a1ae5; margin-left: -7%; ">
+            <i class="bi bi-backspace-reverse-fill"> Unlock System</i>
+          </button>
+        </div>
+
+
+    <!-- BOTON ENVIAR -->
+
+        <div class="col-1 text-end animate__animated animate__fadeInRight" style="margin-left: -3%;">
+          <button class="btn btn-dark" onclick="showToast()">
+            Enter
+          </button>
+        </div>
+
+      </div> 
+
+    </section>
+
+
+    <!-- TOAST MENSAJE DESPLEGABLE -->
+
+    <div aria-live="polite" aria-atomic="true" class=" toast-container d-flex justify-content-center align-items-center top-50 w-100 h-250" style="text-align: justify;">
+      <div id="liveToastOr" class="toast" role="alert" aria-live="assertive" aria-atomic="true">
+      
+        <div class="toast-header" style="background-color: #dd1a1ae5;">
+          <i class="bi bi-exclamation-circle"></i>
+          <strong class="me-auto" style="margin-left: 3%;">Alert</strong>
+          <i class="bi bi-x-circle"  style="cursor: pointer;" onclick="salirToast()"></i>
+        </div>
+        <div class="toast-body justify-content" id="miDiv">
+          Incorrect username or password left 2 atempts
+        </div>
+
+      </div>
+    </div>
+
+
+    <!-- TOAST SUPERIOR DERECHA -->
+
+    <div class="toast-container top-0 end-0 p-3">
+      <!-- Then put toasts within -->
+      <div id="toastSuperior" class="toast" role="alert" aria-live="assertive" aria-atomic="true" style="display: none;">
+      
+        <div class="toast-header" style="background-color: #dd1a1ae5;">
+
+          <i class="bi bi-lock-fill animate__animated animate__zoomIn"></i>
+          <strong class="me-auto" style="margin-left: 3%;">your system is locked!</strong>
+          <strong class="me-auto" id="temps" style="margin-left: 20%;">11 mins ago</strong>
+
+        </div>
+
+        <div class="toast-body justify-content" id="miDiv" style="text-align: justify; margin: 2%">
+          Please contact an administratir to unlock your system or contact the technical department
+        </div>
+
+        <div class="toast-body justify-content" id="miDiv" style="text-align: justify; margin: 2%; margin-top: -3%">
+          <i class="bi bi-headset"></i> ext 666 / terminal number 00345
+        </div>
+
+        <div class="toast-body justify-content" id="miDiv" style="text-align: justify; margin: 2%; margin-top: -3%">
+          <i class="bi bi-exclamation-square"></i> alert code: / 07-566
+        </div>
+
+      </div>
+
+    </div>
+
+    <!-- TOAST SUPERIOR ALERTA -->
+
+    <div class="toast-container animate__animated animate__fadeInDown d-flex justify-content-center align-items-center top-0 w-100 h-250" style="margin-top: 2%;">
+      <div id="toastSuperior2" class="toast" role="alert" aria-live="assertive" aria-atomic="true" style="display: none;">
+
+        <div class="toast-header">
+
+          <i class="bi bi-exclamation-circle"></i>
+          <strong class="me-auto" style="margin-left: 3%;">unlock system ready</strong>
+          <strong class="me-auto" style="opacity: 60%; margin-left: 19%;">only admin acces</strong>
+
+        </div>
+
+        <div class="input-group mb-3" style="margin-top: 1%; padding: 3%">
+
+          <span class="input-group-text " id="basic-addon1"><i class="bi bi-person-square animate__animated animate__zoomIn"></i></span>
+          <input type="text" class="form-control" id="usuario" placeholder="Username" aria-label="Username"
+          aria-describedby="basic-addon1">
+
+        </div>
+
+        <div class="input-group mb-3" style="margin-top: -5%; padding: 3%">
+
+          <span class="input-group-text " id="basic-addon2"><i class="bi bi-lock-fill animate__animated animate__zoomIn"></i></span>
+          <input type="password" class="form-control" id="contra"  placeholder="Password" aria-label="Password"
+          aria-describedby="basic-addon1">
+  
+        </div>
+
+        <div class="input-group mb-3" style="margin-top: -5%; padding: 3%">
+
+          <div id="divToasSup2" class="form-control "aria-describedby="basic-addon1" style="background-color: #dd1a1ae5; display: none; margin-bottom: 5%">
+            <p style="text-align: start;">Incorrect username or password, please try again</p>
+          </div>
+  
+        </div>
+ 
+        <div style="text-align: left; margin-top: -10%; padding: 3%">   
+
+          <button class="btn btn-dark" onclick="showToastS()">
+            <i class="bi bi-box-arrow-in-right"></i> 
+            Enter
+          </button>
+
+        </div>
+
+      </div>
+    </div>
+    
+
+  </div>
+  
+  <script src="bideo.js"></script>
+  <script src="main.js"></script>
+
+</body>
+
+</html>
